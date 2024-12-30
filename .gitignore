@@ -1,0 +1,10 @@
+# NixOS .gitignore file #
+#########################
+
+# Directories
+
+# Files
+.envrc
+
+# Git
+.git/
