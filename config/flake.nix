@@ -26,12 +26,12 @@
           ./configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
-	    home-manager.users.jordan = import ./home.nix;
+	      home-manager.useUserPackages = true;
+	      home-manager.users.jordan = import ./home.nix;
 	    }
           {
-	  environment.systemPackages = [
-            ghostty.packages.x86_64-linux.default
+	      environment.systemPackages = [
+              ghostty.packages.x86_64-linux.default
 	      ];
 	    }
 	  ];

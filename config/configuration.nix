@@ -102,23 +102,22 @@
   users.users.jordan = {
     isNormalUser = true;
     description = "JC Palmer";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.zsh;
  #  packages = with pkgs; [
  #  ];
   };
 
-  # Install firefox.
+  # Install and enable Firefox.
   programs.firefox.enable = true;
 
-  # Allow unfree packages
+  # Allow unfree packages.
   nixpkgs.config.allowUnfree = true;
 
   # Allow insecure packages.
   nixpkgs.config.permittedInsecurePackages = [
     "electron-28.3.3"
     "electron-27.3.11"
-    "electron-31.7.6"
   ];
 
   # List packages installed in system profile. To search, run:
@@ -128,10 +127,13 @@
     wget
     git
     neovim
-    alacritty
     zsh
     pass
     fprintd
+    libvirt
+    qemu
+    virt-manager
+    spice
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -166,6 +168,34 @@
   services.fprintd.enable = true;
   services.fprintd.tod.enable = true;
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
+
+  # Enable virtualization.
+
+  ## Enable libvirt.
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+	runAsRoot = true;
+	swtpm.enable = true;
+	ovmf = {
+        enable = true;
+	  packages = [(pkgs.OVMF.override {
+          secureBoot = true;
+	    tpmSupport = true;
+	  }).fd];
+	};
+    };
+  };
+
+  ## Enable nested virtualization.
+  boot.extraModprobeConfig = "options kvm_intel nested=1";
+
+  ## Enable VirtioFS.
+  virtualisation.libvirtd.qemu.vhostUserPackages = [ pkgs.virtiofsd ];
+
+  ## Enable Spice USB redirection.
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

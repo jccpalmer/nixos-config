@@ -89,8 +89,6 @@
       ethtool
       pciutils
       usbutils
-      kdePackages.kwalletmanager
-      kdePackages.kwallet-pam
       pinentry-gnome3
       tmux
 
@@ -173,7 +171,16 @@
 
     systemd.user.startServices = "sd-switch";
 
-    ## Overlays
+    # Dconf
+
+    dconf.settings = {
+      "org/virt-manager/virt-manager/connections" = {
+        autoconnect = ["qemu:///system"];
+	  uris = ["qemu:///system"];
+	};
+    };
+
+    # Overlays
 
     nixpkgs.overlays = [
       (
