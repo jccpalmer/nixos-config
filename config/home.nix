@@ -60,7 +60,10 @@
       nix-output-monitor
 
       # Emacs
-      emacs
+#     emacs
+	mu
+	isync
+	offlineimap
 
       # Productivity
       libreoffice-fresh
@@ -71,6 +74,7 @@
       protonmail-bridge
       mullvad-vpn
       nextcloud-client
+	vscodium
 
       # Browser
       brave
@@ -143,6 +147,19 @@
 	  gp = "git pull";
 	  gc = "git commit -m";
       };
+    };
+
+    programs = {
+      mu.enable = true;
+	msmtp.enable = true;
+	mbsync.enable = true;
+    };
+
+    programs.emacs = {
+      enable = true;
+      extraPackages = epkgs: [
+	  epkgs.mu4e
+	];
     };
 
     # Services
