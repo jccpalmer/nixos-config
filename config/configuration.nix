@@ -63,6 +63,7 @@
   # Enable the GNOME desktop environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.gnome.sessionPath = [ pkgs.gnome-menus ];
 
   # Enable the KDE Plasma desktop environment.
   # services.displayManager.sddm.enable = true;

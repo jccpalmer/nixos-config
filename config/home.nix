@@ -114,6 +114,9 @@
       oh-my-zsh
       zsh-autosuggestions
       zsh-syntax-highlighting
+
+	# GNOME additions
+	gnome-tweaks
     ];
 
     # Programs
