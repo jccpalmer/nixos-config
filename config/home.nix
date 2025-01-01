@@ -128,6 +128,9 @@
 
 	# GNOME additions
 	gnome-tweaks
+
+	# Website
+	hugo
     ];
 
     # Programs
