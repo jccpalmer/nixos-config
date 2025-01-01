@@ -8,6 +8,7 @@
     # Imports
     imports = [
       ../modules/protonmail-bridge.nix
+	../modules/mail.nix
     ];
 
     # Home Manager settings
@@ -17,6 +18,12 @@
     # User settings
     home.username = "jordan";
     home.homeDirectory = "/home/jordan";
+
+    # File settings
+#    home.file."isyncrc" = {
+#      source = ./isyncrc;
+#	target = "~/.config/.isynrc";
+#    };
 
     # User package management
     home.packages = with pkgs; [

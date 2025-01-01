@@ -103,7 +103,13 @@
   users.users.jordan = {
     isNormalUser = true;
     description = "JC Palmer";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirtd"
+      "kvm"
+      "adbusers"
+    ];
     shell = pkgs.zsh;
  #  packages = with pkgs; [
  #  ];
@@ -136,6 +142,16 @@
     virt-manager
     spice
   ];
+
+  # Enable Android connection.
+  programs.adb.enable = true;
+
+  # Enable Steam.
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
