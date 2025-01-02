@@ -128,6 +128,7 @@
 
 	# GNOME additions
 	gnome-tweaks
+	seahorse
 
 	# Website
 	hugo
