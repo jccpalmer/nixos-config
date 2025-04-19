@@ -4,7 +4,7 @@ set -e
 
 # Flake paths
 SYSTEM_FLAKE="/etc/nixos"
-HOME_FLAKE="$HOME/.config/home-manager"
+HOME_FLAKE="$HOME/.config/nixos"
 
 # Flags
 UPDATE=true

@@ -1,11 +1,8 @@
 { config, pkgs, ... }:
 
 {
-
   home.packages = with pkgs; [
-
     android-tools
-    android-udev-tools
     btop
     eza
     ffmpeg
@@ -17,7 +14,7 @@
     lsof
     ltrace
     ripgrep
-    straceyq-go
-    
+    strace
+    yq-go 
   ];
 }

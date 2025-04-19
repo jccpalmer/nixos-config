@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 
 {
-
   home.packages = with pkgs; [
-
     aria2
     dnsutils
     ipcalc
@@ -14,7 +12,5 @@
     nmap
     socat
     tailscale
-    tailscaled
-
   ];
 }

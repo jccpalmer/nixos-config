@@ -95,69 +95,6 @@
           action = "PasteSelection";
         };
       };
-      keyboard = {
-        bindings = {
-          key = "Paste";
-          action = "Paste";
-          
-          key = "Copy";
-          actions = "Copy";
-
-          key = "L";
-          mods = "Control";
-          action = "ClearLogNotice";
-
-          key = "L";
-          mods = "Control";
-          mode = "~Vi";
-          chars = "\f";
-
-          key = "PageUp";
-          mods = "Shift";
-          mode = "~Alt";
-          action = "ScrollPageUp";
-
-          key = "PageDown";
-          mods = "Shift";
-          mode = "~Alt";
-          action = "ScrollPageDown";
-
-          key = "Home";
-          mods = "Shift";
-          mode = "~Alt";
-          action = "ScrollToTop";
-
-          key = "End";
-          mods = "Shift";
-          mode = "~Alt";
-          action = "ScrollToBottom";
-
-          key = "V";
-          mods = "Control|Shift";
-          action = "Paste";
-
-          key = "C";
-          mods = "Control|Shift";
-          action = "Copy"
-
-          key = "F";
-          mods = "Control|Shift";
-          action = "SearchForward";
-
-          key = "B";
-          mods = "Control|Shift";
-          action = "SearchBackward";
-
-          key = "C";
-          mods = "Control|Shift";
-          mode = "Vi";
-          action = "ClearSelection";
-
-          key = "Key0";
-          mods = "Control";
-          action = "ResetFontSize";
-        };
-      };
     };
   };
 }

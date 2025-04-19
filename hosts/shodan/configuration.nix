@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./cachix.nix
+#      ./cachix.nix
     ];
 
   # Boot.
@@ -167,15 +167,17 @@
     heroic
     lutris
     bottles
+    pinentry-curses
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+   programs.gnupg.agent = {
+    enable = true;
+#    pinentryPackage = "pinentry-curses";
+    enableSSHSupport = true;
+  };
 
   # Virtualization settings.
   programs.virt-manager.enable = true;
@@ -194,6 +196,9 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Enable PCSCD.
+  services.pcscd.enable = true;
 
   # Enable Mullvad VPN.
   services.mullvad-vpn.enable = true;
