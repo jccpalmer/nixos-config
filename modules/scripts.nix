@@ -5,28 +5,28 @@
     (pkgs.writeShellScriptBin "rebuild" ''
       set -e
 
-       # Flake paths
-       SYSTEM_FLAKE="/etc/nixos"
-       HOME_FLAKE="$HOME/.config/nixos"
+      # Flake paths
+      SYSTEM_FLAKE="/etc/nixos"
+      HOME_FLAKE="$HOME/.config/nixos"
 
-       # Flags
-       UPDATE=true
-       RUN_SYSTEM=true
-       RUN_HOME=true
+      # Flags
+      UPDATE=true
+      RUN_SYSTEM=true
+      RUN_HOME=true
 
-       # Parse flags
-       for arg in "$@"; do
-         case $arg in
-           --no-update) UPDATE=false ;;
-           --no-system) RUN_SYSTEM=false ;;
-           --no-home) RUN_HOME=false ;;
-           -h|--help)
+      # Parse flags
+      for arg in "$@"; do
+        case $arg in
+          --no-update) UPDATE=false ;;
+          --no-system) RUN_SYSTEM=false ;;
+          --no-home) RUN_HOME=false ;;
+          -h|--help)
              echo "Usage: rebuild [--no-update] [--no-system] [--no-home]"
            exit 0
-          ;;
-        *) echo "Unknown option: $arg" && exit 1 ;;
-        esac
-      done
+         ;;
+       *) echo "Unknown option: $arg" && exit 1 ;;
+         esac
+       done
 
       update_flake() {
         local path="$1"
@@ -72,7 +72,7 @@
       # HOME REBUILD
       if $RUN_HOME; then
         echo "Rebuilding Home Manager configuration for $USER..."
-        nix run "$HOME_FLAKE#${USER}"
+        nix run "$HOME_FLAKE#jace"
       fi
 
       echo "All done!"
