@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration with agenix";
+  description = "NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -25,7 +25,6 @@
         modules = [
           ./hosts/shodan/configuration.nix
           ./secrets/secrets.nix
-          ./modules/git.nix
           home-manager.nixosModules.home-manager
           agenix.nixosModules.default
 
@@ -44,4 +43,3 @@
     };
   };
 }
-

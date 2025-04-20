@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    age
     android-tools
     btop
     eza
@@ -14,6 +15,7 @@
     lsof
     ltrace
     ripgrep
+    sops
     strace
     yq-go 
   ];
