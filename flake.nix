@@ -1,17 +1,19 @@
 {
-  description = "NixOS configuration with agenix";
+  description = "NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nix-gaming.url = "github:fufexan/nix-gaming";
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, ... }: let
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }: let
     system = "x86_64-linux";
   in {
     nixosConfigurations = {
@@ -19,19 +21,17 @@
         inherit system;
 
         specialArgs = {
-          inherit inputs agenix;
+          inherit inputs;
         };
 
         modules = [
           ./hosts/shodan/configuration.nix
-          ./secrets/secrets.nix
-          ./modules/git.nix
           home-manager.nixosModules.home-manager
-          agenix.nixosModules.default
 
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+#            nixpkgs.config.allowUnfree = true;
 
             home-manager.users.jace = {
               imports = [
@@ -42,6 +42,19 @@
         ];
       };
     };
+
+    packages.${system}.jace = let
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    
+    hmConfig = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      extraSpecialArgs = { inherit inputs; };
+      modules = [ ./home/jace/home.nix ];
+    };
+    in
+      hmConfig.activationPackage;
   };
 }
-
