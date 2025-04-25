@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     age
     android-tools
+    android-udev-rules
     btop
     eza
     ffmpeg

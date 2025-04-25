@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nix-flatpak, ... }:
 
 {
 
@@ -24,4 +24,5 @@
   programs.home-manager.enable = true;
 
   home.stateVersion = "25.05";
+
 }

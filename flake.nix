@@ -11,10 +11,14 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
     agenix.url = "github:ryantm/agenix";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: let
+  outputs = inputs@{ self, nixpkgs, home-manager, nix-flatpak, ... }:
+
+  let
     system = "x86_64-linux";
+
   in {
     nixosConfigurations = {
       shodan = nixpkgs.lib.nixosSystem {
@@ -26,12 +30,12 @@
 
         modules = [
           ./hosts/shodan/configuration.nix
+          nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
-
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-#            nixpkgs.config.allowUnfree = true;
+            home-manager.extraSpecialArgs.flake-inputs = inputs;
 
             home-manager.users.jace = {
               imports = [

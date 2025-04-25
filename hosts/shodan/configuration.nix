@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 #      ./cachix.nix
+#      ../../programs/flatpak.nix
     ];
 
   # Boot.
@@ -22,6 +23,9 @@
         })
       ];
     };
+
+    # Switch Linux kernels.
+    kernelPackages = pkgs.linuxPackages_zen;
 
     # Enable Silent Boot.
     consoleLogLevel = 3;
@@ -39,6 +43,10 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Default shell.
+  users.users.jace.shell = pkgs.zsh;
+  users.users.jace.ignoreShellProgramCheck = true;
 
   networking.hostName = "shodan"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -168,6 +176,16 @@
     lutris
     bottles
     pinentry-curses
+    linuxKernel.kernels.linux_zen
+    nerdfetch
+  ];
+
+  # Fonts.
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+    font-awesome
+    meslo-lgs-nf
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -192,7 +210,13 @@
   # List services that you want to enable:
 
   # Enable Flatpak.
-  services.flatpak.enable = true;
+  services.flatpak= {
+    enable = true;
+    packages = [
+      "io.appflowy.AppFlowy"
+    ];
+    update.onActivation = true;
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -209,6 +233,16 @@
 
   # Enable Tailscale VPN.
   services.tailscale.enable = true;
+
+  # Enable Ollama.
+  services.ollama = {
+    enable = true;
+    loadModels = [ "llama3.1:8b" ];
+  };
+
+  # XDG Desktop Portal.
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # Environment variables.
   environment.sessionVariables = {

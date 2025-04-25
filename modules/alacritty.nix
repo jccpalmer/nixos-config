@@ -17,10 +17,11 @@
         decorations = "full";
         title = "jace@NixOS";
         opacity = 0.8;
+        blur = true;
         decorations_theme_variant = "Dark";
         dimensions = {
-          columns = 100;
-          lines = 30;
+          columns = 110;
+          lines = 35;
         };
         class = {
           instance = "Alacritty";
