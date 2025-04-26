@@ -178,6 +178,8 @@
     pinentry-curses
     linuxKernel.kernels.linux_zen
     nerdfetch
+    xdg-desktop-portal
+    xdg-desktop-portal-gnome
   ];
 
   # Fonts.
@@ -214,6 +216,7 @@
     enable = true;
     packages = [
       "io.appflowy.AppFlowy"
+      "com.github.tchx84.Flatseal"
     ];
     update.onActivation = true;
   };
@@ -237,12 +240,15 @@
   # Enable Ollama.
   services.ollama = {
     enable = true;
-    loadModels = [ "llama3.1:8b" ];
+    loadModels = [ "llama3.1" ];
   };
 
   # XDG Desktop Portal.
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    configPackages = [ pkgs.gnome-session ];
+  };
 
   # Environment variables.
   environment.sessionVariables = {
