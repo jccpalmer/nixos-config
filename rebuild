@@ -3,8 +3,8 @@
 set -e
 
 # Flake paths
-SYSTEM_FLAKE="/etc/nixos"
-HOME_FLAKE="$HOME/.config/nixos"
+SYSTEM_FLAKE="$(realpath /etc/nixos)"
+HOME_FLAKE="$(realpath /.config/nixos)"
 
 # Flags
 UPDATE=true
