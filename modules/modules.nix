@@ -3,14 +3,14 @@
 {
 
   imports = [
-    ./apps/alacritty/default.nix
-    ./apps/kitty/default.nix
-  # ./apps/steam/default.nix
-    ./desktop-environments/gnome/default.nix
-    ./tools/git/default.nix
-    ./tools/scripts/default.nix
-  # ./tools/sops/default.nix
-    ./tools/zsh/default.nix
+    ./apps/alacritty/alacritty.nix
+    ./apps/kitty/kitty.nix
+  # ./apps/nvim/nvim.nix
+    ./desktop-environments/gnome/gnome.nix
+    ./tools/git/git.nix
+    ./tools/scripts/scripts.nix
+  # ./tools/sops/sops.nix
+    ./tools/zsh/sh.nix
   ];
 
 }

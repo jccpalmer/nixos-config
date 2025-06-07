@@ -13,9 +13,10 @@
     agenix.url = "github:ryantm/agenix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     steam-module.url = "path:./modules/apps/steam";
+    nixvim.url = "github:nix-community/nixvim";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nix-flatpak, steam-module, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nix-flatpak, steam-module, nixvim, ... }:
 
   let
     system = "x86_64-linux";
@@ -31,6 +32,7 @@
 
         modules = [
           ./hosts/skynet/configuration.nix
+          nixvim.nixosModules.nixvim
           steam-module.nixosModules.steam
           nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
