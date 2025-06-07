@@ -106,14 +106,9 @@
   programs.firefox.enable = true;
 
   ## Enable Steam and its extras.
-  programs.steam = {
+  steam = {
     enable = true;
-    gamescopeSession.enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
+    username = "jordan";
   };
 
   ## Gamemode.

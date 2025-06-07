@@ -3,11 +3,7 @@
 {
 
   imports = [
-    ../../modules/alacritty.nix
-    ../../modules/git.nix
-    ../../modules/gnome.nix
-    ../../modules/scripts.nix
-    ../../modules/shell.nix
+    ../../modules/modules.nix
     ../../programs/archival.nix
     ../../programs/browsers.nix
     ../../programs/communication.nix

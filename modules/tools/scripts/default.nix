@@ -1,0 +1,81 @@
+{ config, pkgs, ... }:
+
+{
+  home.packages = [
+    (pkgs.writeShellScriptBin "rebuild" ''
+      set -e
+
+      # Flake paths
+      SYSTEM_FLAKE="/etc/nixos"
+      HOME_FLAKE="$HOME/.config/nixos"
+
+      # Flags
+      UPDATE=true
+      RUN_SYSTEM=true
+      RUN_HOME=true
+
+      # Parse flags
+      for arg in "$@"; do
+        case $arg in
+          --no-update) UPDATE=false ;;
+          --no-system) RUN_SYSTEM=false ;;
+          --no-home) RUN_HOME=false ;;
+          -h|--help)
+             echo "Usage: rebuild [--no-update] [--no-system] [--no-home]"
+           exit 0
+         ;;
+       *) echo "Unknown option: $arg" && exit 1 ;;
+         esac
+       done
+
+      update_flake() {
+        local path="$1"
+        local name="$2"
+
+      echo "Checking for updates in $name flake..."
+
+      pushd "$path" > /dev/null
+
+      # Capture pre-update git status
+      PRE_STATUS=$(git status --porcelain)
+
+      nix flake update
+
+      # Capture post-update status
+      POST_STATUS=$(git status --porcelain)
+
+      if [ "$PRE_STATUS" != "$POST_STATUS" ]; then
+        echo "$name flake updated."
+        git add flake.lock
+        git commit -m "flake update: $(date +%F)"
+        git push
+        echo "Changes pushed to remote."
+      else
+        echo "$name flake is already up to date."
+      fi
+
+      popd > /dev/null
+    }
+
+      # UPDATE
+      if $UPDATE; then
+        update_flake "$SYSTEM_FLAKE" "System"
+        update_flake "$HOME_FLAKE" "Home"
+      fi
+
+      # SYSTEM REBUILD
+      if $RUN_SYSTEM; then
+        echo "Rebuilding system configuration..."
+        sudo nixos-rebuild switch --flake "$SYSTEM_FLAKE"
+      fi
+
+      # HOME REBUILD
+      if $RUN_HOME; then
+        echo "Rebuilding Home Manager configuration for $USER..."
+        nix run "$HOME_FLAKE#jace"
+      fi
+
+      echo "All done!"
+    '')
+  ];
+}

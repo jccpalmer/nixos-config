@@ -10,6 +10,7 @@
     ghostty
     gnome-extension-manager
     keepassxc
+    kitty
     lm_sensors
     mullvad-vpn
     nextcloud-client
