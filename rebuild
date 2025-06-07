@@ -4,7 +4,7 @@ set -e
 
 # Flake paths
 SYSTEM_FLAKE="$(realpath /etc/nixos)"
-HOME_FLAKE="$(realpath /.config/nixos)"
+HOME_FLAKE="$(realpath /.dotfiles)"
 
 # Flags
 UPDATE=true
@@ -17,7 +17,7 @@ for arg in "$@"; do
     --no-update) UPDATE=false ;;
     --no-system) RUN_SYSTEM=false ;;
     --no-home) RUN_HOME=false ;;
-    -h|--help)
+    -h | --help)
       echo "Usage: rebuild [--no-update] [--no-system] [--no-home]"
       exit 0
       ;;

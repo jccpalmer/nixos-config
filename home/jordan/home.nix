@@ -18,8 +18,8 @@
     ../../programs/utilities.nix
   ];
 
-  home.username = "jace";
-  home.homeDirectory = "/home/jace";
+  home.username = "jordan";
+  home.homeDirectory = "/home/jordan";
 
   programs.home-manager.enable = true;
 

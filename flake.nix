@@ -21,7 +21,7 @@
 
   in {
     nixosConfigurations = {
-      shodan = nixpkgs.lib.nixosSystem {
+      skynet = nixpkgs.lib.nixosSystem {
         inherit system;
 
         specialArgs = {
@@ -29,7 +29,7 @@
         };
 
         modules = [
-          ./hosts/shodan/configuration.nix
+          ./hosts/skynet/configuration.nix
           nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
           {
@@ -37,9 +37,9 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs.flake-inputs = inputs;
 
-            home-manager.users.jace = {
+            home-manager.users.jordan = {
               imports = [
-                ./home/jace/home.nix
+                ./home/jordan/home.nix
               ];
             };
           }
@@ -47,7 +47,7 @@
       };
     };
 
-    packages.${system}.jace = let
+    packages.${system}.jordan = let
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -56,7 +56,7 @@
     hmConfig = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = { inherit inputs; };
-      modules = [ ./home/jace/home.nix ];
+      modules = [ ./home/jordan/home.nix ];
     };
     in
       hmConfig.activationPackage;
