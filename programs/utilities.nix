@@ -2,10 +2,11 @@
 
 {
   home.packages = with pkgs; [
+
     age
     android-tools
     android-udev-rules
-    btop
+    caligula
     eza
     ffmpeg
     fzf
@@ -15,9 +16,10 @@
     jq
     lsof
     ltrace
+    mpd
     ripgrep
-    sops
     strace
-    yq-go 
+    yq-go
+ 
   ];
 }

@@ -13,8 +13,9 @@
     lm_sensors
     mullvad-vpn
     nextcloud-client
-    nnn
     pciutils
+    ranger
+    rmpc
     sysstat
     usbutils
     

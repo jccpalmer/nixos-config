@@ -5,6 +5,7 @@
   imports = [
     ../../modules/alacritty.nix
     ../../modules/git.nix
+    ../../modules/gnome.nix
     ../../modules/scripts.nix
     ../../modules/shell.nix
     ../../programs/archival.nix
@@ -16,6 +17,7 @@
     ../../programs/productivity.nix
     ../../programs/tools.nix
     ../../programs/utilities.nix
+    ../../services/mpd.nix
   ];
 
   home.username = "jordan";
@@ -23,6 +25,6 @@
 
   programs.home-manager.enable = true;
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
 }

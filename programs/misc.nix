@@ -3,7 +3,8 @@
 {
   
   home.packages = with pkgs; [
-
+    
+    bibata-cursors
     cowsay
     file
     gawk

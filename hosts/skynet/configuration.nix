@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../system/packages.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -108,6 +109,11 @@
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
   };
 
   ## Gamemode.
@@ -117,30 +123,8 @@
   nixpkgs.config.allowUnfree = true;
 
   # System-level packages.
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
-    fish
-    python3
-    tree
-    btop
-    fastfetch
-    wineWowPackages.stable
-    wineWowPackages.waylandFull
-    winetricks
-    dxvk
-    samba
-    nfs-utils
-    kitty
-    gnomeExtensions.arcmenu
-    openssl
-    papers
-    deno
-    nerdfetch
-    xdg-desktop-portal
-    xdg-desktop-portal-gnome
-  ];
+  # environment.systemPackages = with pkgs; [
+  # ];
 
   # Fonts.
   fonts.packages = with pkgs; [
