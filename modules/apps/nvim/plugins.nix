@@ -24,7 +24,7 @@
       };
       tinygit.enable = true;
       quickmath.enable = true;
-      qmk.enable = true;
+  #   qmk.enable = true;
       actions-preview.enable = true;
       aerial.enable = true;
       auto-save.enable = true;
@@ -42,5 +42,4 @@
     };
 #    extraPlugins = with pkgs.vimPlugins; [
 #    ];
-  };
 }

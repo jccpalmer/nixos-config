@@ -44,6 +44,7 @@
             home-manager.users.jordan = {
               imports = [
                 ./home/jordan/home.nix
+                nixvim.homeManagerModules.nixvim
               ];
             };
           }

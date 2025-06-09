@@ -4,7 +4,7 @@
   imports = [
     ./colorschemes.nix
     ./globals.nix
-    ./keybinds.nix
+  # ./keybinds.nix
     ./options.nix
     ./plugins.nix
   ];

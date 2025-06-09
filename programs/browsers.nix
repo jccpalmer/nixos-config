@@ -6,7 +6,9 @@
 
     librewolf
     mullvad-browser
+    qutebrowser
     ungoogled-chromium
+    widevine-cdm
 
   ];
 }
