@@ -5,6 +5,7 @@
 
     strawberry
     heroic
+    lutris
 
   ];
 }
