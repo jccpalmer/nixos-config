@@ -1,12 +1,23 @@
-{ config, pkgs, ... }:
+{ pkgs, nixvim, ...}:
 
 {
-  programs.neovim = {
-    extraLuaConfig = ''
-      vim.opt.number = true
-      vim.opt.cursorline = true
-      vim.opt.relativenumber = true
-      vim.opt.shiftwidth = 4
-    '';
+  programs.nixvim = {
+    opts = {
+      number = true;
+      relativenumber = true;
+      cursorline = true;
+      shiftwidth = 4;
+      wrap = true;
+      splitright = true;
+      smarttab = true;
+      autoindent = true;
+      smartindent = true;
+      wildmenu = true;
+      hlsearch = true;
+      incsearch = true;
+      ignorecase = true;
+      smartcase = true;
+      exrc = true;
+    };
   };
 }

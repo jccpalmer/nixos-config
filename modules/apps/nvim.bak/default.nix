@@ -1,20 +1,16 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, nixvim, lib, ... }:
 
-let
-  fromGithub = import ./functions/fromGithub.nix;
-
-in
-  
 {
   imports = [
-    ./colors.nix
+    ./colorschemes.nix
+    ./globals.nix
+  # ./keybinds.nix
     ./options.nix
+    ./plugins.nix
   ];
-  programs.neovim = {
+
+  programs.nixvim = {
     enable = true;
     defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
   };
 }

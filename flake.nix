@@ -13,14 +13,22 @@
     agenix.url = "github:ryantm/agenix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     steam-module.url = "path:./modules/apps/steam";
-    nixvim.url = "github:nix-community/nixvim";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nix-flatpak, steam-module, nixvim, ... }:
-
-  let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-flatpak,
+    steam-module,
+    nvf,
+    ...
+  }: let
     system = "x86_64-linux";
-
   in {
     nixosConfigurations = {
       skynet = nixpkgs.lib.nixosSystem {
@@ -32,7 +40,7 @@
 
         modules = [
           ./hosts/skynet/configuration.nix
-          nixvim.nixosModules.nixvim
+          nvf.nixosModules.default
           steam-module.nixosModules.steam
           nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
@@ -44,7 +52,6 @@
             home-manager.users.jordan = {
               imports = [
                 ./home/jordan/home.nix
-                nixvim.homeManagerModules.nixvim
               ];
             };
           }
@@ -57,12 +64,12 @@
         inherit system;
         config.allowUnfree = true;
       };
-    
-    hmConfig = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      extraSpecialArgs = { inherit inputs; };
-      modules = [ ./home/jordan/home.nix ];
-    };
+
+      hmConfig = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [./home/jordan/home.nix];
+      };
     in
       hmConfig.activationPackage;
   };
