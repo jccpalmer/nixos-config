@@ -5,6 +5,7 @@
   imports = [
     ./apps/alacritty/alacritty.nix
     ./apps/kitty/kitty.nix
+    ./apps/nvim/nvim.nix
     ./desktop-environments/gnome/gnome.nix
     ./tools/git/git.nix
     ./tools/scripts/scripts.nix

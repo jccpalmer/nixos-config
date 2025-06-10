@@ -27,7 +27,9 @@
     steam-module,
     nvf,
     ...
-  }: let
+  }:
+
+  let
     system = "x86_64-linux";
   in {
     nixosConfigurations = {
@@ -52,6 +54,7 @@
             home-manager.users.jordan = {
               imports = [
                 ./home/jordan/home.nix
+		nvf.homeManagerModules.default
               ];
             };
           }
