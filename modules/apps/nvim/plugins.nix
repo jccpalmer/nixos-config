@@ -38,8 +38,16 @@
       neo-tree.enable = true;
       nix.enable = true;
       nvim-surround.enable = true;
+
+      mini = {
+        enable = true;
+        mockDevIcons = true;
+        modules = {
+          icons = {
+            style = "glyph";
+          };
+        };
       };
     };
-#    extraPlugins = with pkgs.vimPlugins; [
-#    ];
+  };
 }

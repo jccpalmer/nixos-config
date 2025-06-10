@@ -10,7 +10,6 @@
     joplin-desktop
     libreoffice
     newsflash
-    neovim
     obsidian
     zotero
 

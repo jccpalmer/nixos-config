@@ -13,10 +13,7 @@
     agenix.url = "github:ryantm/agenix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     steam-module.url = "path:./modules/apps/steam";
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixvim.url = "github:nix-community/nixvim";
   };
 
   outputs = inputs @ {
@@ -25,7 +22,7 @@
     home-manager,
     nix-flatpak,
     steam-module,
-    nvf,
+    nixvim,
     ...
   }:
 
@@ -42,7 +39,7 @@
 
         modules = [
           ./hosts/skynet/configuration.nix
-          nvf.nixosModules.default
+        # nixvim.homeManagerModules.nixvim
           steam-module.nixosModules.steam
           nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
@@ -54,7 +51,7 @@
             home-manager.users.jordan = {
               imports = [
                 ./home/jordan/home.nix
-		nvf.homeManagerModules.default
+		nixvim.homeManagerModules.nixvim
               ];
             };
           }
