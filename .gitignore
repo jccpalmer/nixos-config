@@ -1,5 +1,8 @@
 # NixOS .gitignore #
 ####################
 
+# Directories
+result/
+
 # Git
 .git/
