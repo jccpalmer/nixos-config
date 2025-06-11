@@ -28,7 +28,14 @@
 
   let
     system = "x86_64-linux";
+
+    # Shared Home Manager modules:
+    jordanHomeModules = [
+      ./home/jordan/home.nix
+      nixvim.homeManagerModules.nixvim
+    ];
   in {
+
     nixosConfigurations = {
       skynet = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -39,20 +46,17 @@
 
         modules = [
           ./hosts/skynet/configuration.nix
-        # nixvim.homeManagerModules.nixvim
           steam-module.nixosModules.steam
           nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
+
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs.flake-inputs = inputs;
 
             home-manager.users.jordan = {
-              imports = [
-                ./home/jordan/home.nix
-		nixvim.homeManagerModules.nixvim
-              ];
+              imports = jordanHomeModules;
             };
           }
         ];
@@ -67,10 +71,11 @@
 
       hmConfig = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [./home/jordan/home.nix];
+        extraSpecialArgs = { inherit inputs; };
+        modules = jordanHomeModules;
       };
     in
       hmConfig.activationPackage;
   };
 }
+

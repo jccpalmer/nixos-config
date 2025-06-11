@@ -3,8 +3,8 @@
 set -e
 
 # Flake paths
-SYSTEM_FLAKE="$(realpath /etc/nixos)"
-HOME_FLAKE="$(realpath /.dotfiles)"
+SYSTEM_FLAKE="$(realpath "$HOME/.dotfiles")"
+HOME_FLAKE="$(realpath "$HOME/.dotfiles")"
 
 # Flags
 UPDATE=true
@@ -29,26 +29,33 @@ update_flake() {
   local path="$1"
   local name="$2"
 
+  if [ ! -d "$path" ]; then
+    echo "Skipping update: $name flake directory does not exist at $path."
+    return
+  fi
+
   echo "Checking for updates in $name flake..."
 
   pushd "$path" > /dev/null
 
-  # Capture pre-update git status
-  PRE_STATUS=$(git status --porcelain)
-
   nix flake update
 
-  # Capture post-update status
-  POST_STATUS=$(git status --porcelain)
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    # Capture pre- and post-update git status
+    PRE_STATUS=$(git status --porcelain)
+    POST_STATUS=$(git status --porcelain)
 
-  if [ "$PRE_STATUS" != "$POST_STATUS" ]; then
-    echo "$name flake updated."
-    git add flake.lock
-    git commit -m "flake update: $(date +%F)"
-    git push
-    echo "Changes pushed to remote."
+    if [ "$PRE_STATUS" != "$POST_STATUS" ]; then
+      echo "$name flake updated."
+      git add flake.lock
+      git commit -m "flake update: $(date +%F)"
+      git push
+      echo "Changes pushed to remote."
+    else
+      echo "$name flake is already up to date."
+    fi
   else
-    echo "$name flake is already up to date."
+    echo "Warning: $path is not a Git repo, skipping Git steps."
   fi
 
   popd > /dev/null
@@ -68,8 +75,10 @@ fi
 
 # HOME REBUILD
 if $RUN_HOME; then
-  echo "Rebuilding Home Manager configuration for $USER..."
-  nix run "$HOME_FLAKE#${USER}"
+  echo "Building Home Manager configuration for $USER..."
+  nix build "$HOME_FLAKE#${USER}"
+  echo "Activating Home Manager configuration..."
+  ./result/activate
 fi
 
 echo "All done!"
