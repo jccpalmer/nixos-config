@@ -103,6 +103,8 @@
 
   # Enable system-level programs.
 
+  programs.zsh.enable = true;
+
   programs.firefox.enable = true;
 
   ## Enable Steam and its extras.

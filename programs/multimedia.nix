@@ -3,9 +3,10 @@
 {
   home.packages = with pkgs; [
 
-    strawberry
     heroic
     lutris
+    sunshine
+    strawberry
 
   ];
 }

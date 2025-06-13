@@ -24,10 +24,10 @@
     ];
     initContent = ''
       source ~/.p10k.zsh
+      fastfetch
     '';
-  };
 
-  home.sessionVariables = {
-    PATH = "${config.home.homeDirectory}/.local/bin:${builtins.getEnv "PATH"}";
   };
+  
+  home.sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
 }

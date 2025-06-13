@@ -6,22 +6,24 @@
       telescope.enable = true;
       treesitter = {
         enable = true;
-
         grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
           bash
+          go
           json
           lua
           make
           markdown
+          markdown_inline
           nix
           regex
-          toml
+          toml 
           vim
           vimdoc
           xml
           yaml
         ];
       };
+
       tinygit.enable = true;
       quickmath.enable = true;
   #   qmk.enable = true;

@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-
     age
     android-tools
     android-udev-rules
@@ -17,9 +16,10 @@
     lsof
     ltrace
     mpd
+    prettier
+    prettier-plugin-go-template
     ripgrep
     strace
     yq-go
- 
   ];
 }
