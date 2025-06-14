@@ -5,6 +5,7 @@
     age
     android-tools
     android-udev-rules
+    bottles
     caligula
     eza
     ffmpeg
@@ -18,6 +19,7 @@
     mpd
     prettier
     prettier-plugin-go-template
+    qbittorrent
     ripgrep
     strace
     yq-go

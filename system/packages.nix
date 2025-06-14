@@ -5,7 +5,6 @@
   environment.systemPackages = with pkgs; [
     btop
     curl
-    deno
     dxvk
     fastfetch
     git
