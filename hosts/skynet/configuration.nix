@@ -80,8 +80,22 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+#  services.displayManager.gdm.enable = true;
+#  services.desktopManager.gnome.enable = true;
+
+  # Enable the KDE Plasma Desktop Environment.
+  services = {
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
+  };
+
+  # QT application theme.
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
+  };
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -90,13 +104,14 @@
   services.printing.enable = true;
 
   # Enable sound.
+  security.rtkit.enable = true;
   services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    jack.enable = true;
+#   jack.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -123,12 +138,28 @@
   ## Gamemode.
   programs.gamemode.enable = true;
 
+  ## Dconf.
+  programs.dconf.enable = true;
+
   # Allow unfree packages.
   nixpkgs.config.allowUnfree = true;
 
   # System-level packages.
-  # environment.systemPackages = with pkgs; [
-  # ];
+  environment.systemPackages = with pkgs; [
+    kdePackages.discover
+    kdePackages.kcalc
+    kdePackages.kcharselect
+    kdePackages.kcolorchooser
+    kdePackages.kolourpaint
+    kdePackages.ksystemlog
+    kdePackages.sddm-kcm
+    kdePackages.isoimagewriter
+    kdePackages.partitionmanager
+    kdiff3
+    hardinfo2
+    wayland-utils
+    wl-clipboard
+  ];
 
   # Fonts.
   fonts.packages = with pkgs; [
